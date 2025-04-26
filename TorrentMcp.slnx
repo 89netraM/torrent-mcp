@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="TorrentMcp.Domain/TorrentMcp.Domain.csproj" />
+  <Project Path="TorrentMcp.FloodIntegration/TorrentMcp.FloodIntegration.csproj" />
+  <Project Path="TorrentMcp.Server/TorrentMcp.Server.csproj" />
+</Solution>

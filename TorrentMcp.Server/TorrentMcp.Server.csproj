@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <PublishAot>true</PublishAot>
+    <UserSecretsId>ede6cd11-58e5-470b-8b28-a94565935a2d</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TorrentMcp.Domain\TorrentMcp.Domain.csproj" />
+    <ProjectReference Include="..\TorrentMcp.FloodIntegration\TorrentMcp.FloodIntegration.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4" />
+    <PackageReference Include="ModelContextProtocol.AspNetCore" Version="0.1.0-preview.11" />
+  </ItemGroup>
+</Project>

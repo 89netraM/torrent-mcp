@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net9.0": {
+      "CSharpier.MsBuild": {
+        "type": "Direct",
+        "requested": "[1.0.1, )",
+        "resolved": "1.0.1",
+        "contentHash": "K1S0hjUoshr3dz9NoijnJWj4OltTyOEq/wl59tUwnErvq1ZcZsI4ar0NmnKf2hQbhlVmei95llk4HfN6WZ5m6A=="
+      }
+    },
+    "net9.0/linux-x64": {},
+    "net9.0/win-arm64": {}
+  }
+}
