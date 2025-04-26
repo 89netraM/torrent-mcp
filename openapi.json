@@ -1,0 +1,355 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Secure Time Utilities API",
+        "description": "Provides secure UTC/local time retrieval, formatting, timezone conversion, and comparison.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/get_current_utc_time": {
+            "get": {
+                "summary": "Current UTC time",
+                "description": "Returns the current time in UTC in ISO format.",
+                "operationId": "get_current_utc_get_current_utc_time_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/get_current_local_time": {
+            "get": {
+                "summary": "Current Local Time",
+                "description": "Returns the current time in local timezone in ISO format.",
+                "operationId": "get_current_local_get_current_local_time_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/format_time": {
+            "post": {
+                "summary": "Format current time",
+                "description": "Return the current time formatted for a specific timezone and format.",
+                "operationId": "format_current_time_format_time_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FormatTimeInput"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/convert_time": {
+            "post": {
+                "summary": "Convert between timezones",
+                "description": "Convert a timestamp from one timezone to another.",
+                "operationId": "convert_time_convert_time_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ConvertTimeInput"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/elapsed_time": {
+            "post": {
+                "summary": "Time elapsed between timestamps",
+                "description": "Calculate the difference between two timestamps in chosen units.",
+                "operationId": "elapsed_time_elapsed_time_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ElapsedTimeInput"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/parse_timestamp": {
+            "post": {
+                "summary": "Parse and normalize timestamps",
+                "description": "Parse human-friendly input timestamp and return standardized UTC ISO time.",
+                "operationId": "parse_timestamp_parse_timestamp_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ParseTimestampInput"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/list_time_zones": {
+            "get": {
+                "summary": "All valid time zones",
+                "description": "Return a list of all valid IANA time zones.",
+                "operationId": "list_time_zones_list_time_zones_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ConvertTimeInput": {
+                "properties": {
+                    "timestamp": {
+                        "type": "string",
+                        "title": "Timestamp",
+                        "description": "ISO 8601 formatted time string (e.g., 2024-01-01T12:00:00Z)"
+                    },
+                    "from_tz": {
+                        "type": "string",
+                        "title": "From Tz",
+                        "description": "Original IANA time zone of input (e.g. UTC or Europe/Berlin)"
+                    },
+                    "to_tz": {
+                        "type": "string",
+                        "title": "To Tz",
+                        "description": "Target IANA time zone to convert to"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "timestamp",
+                    "from_tz",
+                    "to_tz"
+                ],
+                "title": "ConvertTimeInput"
+            },
+            "ElapsedTimeInput": {
+                "properties": {
+                    "start": {
+                        "type": "string",
+                        "title": "Start",
+                        "description": "Start timestamp in ISO 8601 format"
+                    },
+                    "end": {
+                        "type": "string",
+                        "title": "End",
+                        "description": "End timestamp in ISO 8601 format"
+                    },
+                    "units": {
+                        "type": "string",
+                        "enum": [
+                            "seconds",
+                            "minutes",
+                            "hours",
+                            "days"
+                        ],
+                        "title": "Units",
+                        "description": "Unit for elapsed time",
+                        "default": "seconds"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "start",
+                    "end"
+                ],
+                "title": "ElapsedTimeInput"
+            },
+            "FormatTimeInput": {
+                "properties": {
+                    "format": {
+                        "type": "string",
+                        "title": "Format",
+                        "description": "Python strftime format string",
+                        "default": "%Y-%m-%d %H:%M:%S"
+                    },
+                    "timezone": {
+                        "type": "string",
+                        "title": "Timezone",
+                        "description": "IANA timezone name (e.g., UTC, America/New_York)",
+                        "default": "UTC"
+                    }
+                },
+                "type": "object",
+                "title": "FormatTimeInput"
+            },
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "ParseTimestampInput": {
+                "properties": {
+                    "timestamp": {
+                        "type": "string",
+                        "title": "Timestamp",
+                        "description": "Flexible input timestamp string (e.g., 2024-06-01 12:00 PM)"
+                    },
+                    "timezone": {
+                        "type": "string",
+                        "title": "Timezone",
+                        "description": "Assumed timezone if none is specified in input",
+                        "default": "UTC"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "timestamp"
+                ],
+                "title": "ParseTimestampInput"
+            },
+            "ValidationError": {
+                "pro* Connection #0 to host localhost left intactperties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            }
+        }
+    }
+}

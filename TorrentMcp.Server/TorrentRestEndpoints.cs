@@ -24,17 +24,30 @@ public static class TorrentRestEndpoints
         group
             .MapGet("/torrents", GetTorrents)
             .Produces<IEnumerable<TorrentItemDto>>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
-            .ProducesProblem(StatusCodes.Status500InternalServerError);
+            .ProducesProblem(StatusCodes.Status500InternalServerError)
+            .WithName("ListTorrents")
+            .WithSummary("Lists all active torrents")
+            .WithDescription(
+                "Returns a list of all active torrents on the connected torrent client. Lists IDs, names, and a few details."
+            );
 
         group
             .MapPost("/torrents", PostTorrent)
             .Produces<AddTorrentResponse>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
-            .ProducesProblem(StatusCodes.Status500InternalServerError);
+            .ProducesProblem(StatusCodes.Status500InternalServerError)
+            .WithName("StartTorrent")
+            .WithSummary("Start downloading a torrent file")
+            .WithDescription(
+                "Takes a torrent file and starts downloading it into the provided directory. Returns its ID on success."
+            );
 
         group
             .MapDelete("/torrents/{id}", DeleteTorrent)
             .Produces<DeleteTorrentResponse>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
-            .ProducesProblem(StatusCodes.Status500InternalServerError);
+            .ProducesProblem(StatusCodes.Status500InternalServerError)
+            .WithName("StopTorrent")
+            .WithSummary("Stop downloading/seeding a torrent")
+            .WithDescription("Stops downloading and seeding a torrent without removing the data already downloaded.");
 
         return group;
     }
